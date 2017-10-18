@@ -9,46 +9,52 @@
   <title>Scordatura</title>
 <style type="text/css">
 body {
+  margin: 0;
+  padding: 0;
   background-color: #000000;
   text-align: center;
   white-space: nowrap;
 }
-nav#topaz {
-  margin-top: 2%;
+nav#chalkboard {
+  margin: 2% 0 0 0;
+  padding: 0;
 }
-nav#topaz ul {
-  width: 480px;
+nav#chalkboard ul {
+  width: 500px;
   margin: 0 auto;
   border: 1px dotted #101010;
   padding: 0;
 }
-nav#topaz li {
+nav#chalkboard li {
   display: inline;
   margin: 0.5em;
   line-height: 2em;
-  letter-spacing: 1px;
   font-family: sans-serif;
   font-size: 1em;
 }
-nav#topaz li a {
+nav#chalkboard li a {
   cursor: pointer;
   text-decoration: none;
   color: #008080;
 }
-nav#topaz li a:hover {
+nav#chalkboard li a:hover {
   text-decoration: underline;
   color: #00ced1;
 }
 section.chordophone {
-  margin-top: 0;
+  margin: 0;
+  padding: 0;
 }
 section.chordophone dl {
+  margin: 0;
+  padding: 0;
   font-family: monospace;
   font-size: 1.6em;
   color: #999900;
 }
 section.chordophone dt {
-  margin-bottom: 0.25em;
+  margin: 0.3em;
+  padding: 0;
   font-weight: bold;
   color: #8b4513;
 }
@@ -58,6 +64,7 @@ section.chordophone dd {
 }
 footer.utility {
   margin-top: 5%;
+  padding: 0;
   font-family: sans-serif;
 }
 noscript.message {
@@ -68,42 +75,46 @@ p.notice {
   font-size: 0.8em;
   color: #2f4f4f;
 }
-@media screen and ( max-width: 500px ) {
-  nav#topaz li {
-    margin: 0.25em;
-    line-height: 1em;
+@media screen and (max-width: 600px) {
+  nav#chalkboard ul {
+    width: 480px;
+  }
+  nav#chalkboard li {
+    margin: 0.3em;
+    line-height: 1.3em;
   }
   section.chordophone dl {
-    font-size: 1.1em;
+    font-size: 1.25em;
   }
 }
 </style>
 </head>
 <body onload="ZrSiO4('n0')">
 
-  <nav id="topaz">
+  <nav id="chalkboard">
 <script type="application/javascript">
 "use strict";
 (function() {
 
   var menuItem = [
-    'n0',     'k6',      'j17',    'k6x5',   'j17y2',   'j3',
-    'j34k6',  'k2j17',   'n26y5',  'k26x5',  'j6',      'j36',
-    'k56',    'j136y7',  'k56x4',  'n167x4', 'j3k5x4',  'j167y2',
-    'j2',     'j236',    'j26',    'j23',    'j23k6',   'j2y3',
-    'j2k6',   'j26y3',   'j2k56',  'j246y3', 'j2k56x4', 'k157x6',
-    'j26y34', 'j2k6x5',  'j2k6y3', 'k1j6',   'n345',    'j3k6', 
-    'n45y2',  'j3k56x4', 'k2j6',   'n5y2',   'k26',     'k256'
+    'j136y7',  'j167y2', 'j17',    'j17y2', 'j2',     'j23',   'j236',
+    'j23k6',   'j246y3', 'j26',    'j26y3', 'j26y34', 'j2k56', 'j2k56x4',
+    'j2k6',    'j2k6x5', 'j2k6y3', 'j2y3',  'j3',     'j34k6', 'j36',
+    'j3k56x4', 'j3k5x4', 'j3k6',   'j6',    'k157x6', 'k1j6',  'k256',
+    'k26',     'k26x5',  'k2j17',  'k2j6',  'k56',    'k56x4', 'k6',
+    'k6x5',    'n0',     'n167x4', 'n26y5', 'n345',   'n45y2', 'n5y2'
   ];
 
   for (var ndx = 0; ndx < menuItem.length; ndx++) {
-    var head = '<li><a onclick=\"ZrSiO4(\'',
+
+    var columns = 7,
+        head = '<li><a onclick=\"ZrSiO4(\'',
         core = '\')\">',
         tail = '<\/a><\/li>';
 
     if (0 == ndx) document.writeln('<ul>');
 
-    if (0 == ((ndx + 1) % 6)) {
+    if (0 == ((ndx + 1) % columns)) {
       document.writeln(head + menuItem[ndx] +
         core + menuItem[ndx] + tail + '<\/ul>');
     } else {
@@ -113,7 +124,7 @@ p.notice {
 
     if (ndx == menuItem.length - 1) break;
 
-    if (0 == ((ndx + 1) % 6)) document.writeln('<ul>');
+    if (0 == ((ndx + 1) % columns)) document.writeln('<ul>');
   }
 
 })();
@@ -225,8 +236,10 @@ var ZrSiO4 = function(keyName) {
  k2j56y7: "镎铜 一一 一一 铁钚 汞汞 钚铁 锡钒 一一 铜镎 铅金 一一 一一 "};
 
   dataStore.digraph = {
-    gj: function(qp) {return(qp.slice(18,36).concat(qp.slice(0,18)))},
-    dj: function(qp) {return(qp.slice( 3,36).concat(qp.slice(0, 3)))},
+    fj: function(qp) {return this.en(qp)},
+    cj: function(qp) {return this.bn(qp)},
+    gj: function(qp) {return this.fk(qp)},
+    dj: function(qp) {return this.ck(qp)},
     aj: function(qp) {return(qp.slice(24,36).concat(qp.slice(0,24)))},
     ej: function(qp) {return(qp.slice( 9,36).concat(qp.slice(0, 9)))},
     bj: function(qp) {return(qp.slice(30,36).concat(qp.slice(0,30)))},
@@ -240,8 +253,10 @@ var ZrSiO4 = function(keyName) {
     fk: function(qp) {return(qp.slice(18,36).concat(qp.slice(0,18)))},
     ck: function(qp) {return(qp.slice( 3,36).concat(qp.slice(0, 3)))},
     gk: function(qp) {return(qp.slice(24,36).concat(qp.slice(0,24)))},
-    dk: function(qp) {return(qp.slice( 9,36).concat(qp.slice(0, 9)))},
-    ak: function(qp) {return(qp.slice(30,36).concat(qp.slice(0,30)))}
+    dk: function(qp) {return this.ej(qp)},
+    ak: function(qp) {return this.bj(qp)},
+    ek: function(qp) {return this.fn(qp)},
+    bk: function(qp) {return this.cn(qp)}
   };
 
   dataStore.layout = document.getElementById("fingerboard");

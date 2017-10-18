@@ -14,7 +14,7 @@ command line
 
     cd scordatura/
 
-    dwb -S index.html
+    dwb -RS index.html
 
 ---
 

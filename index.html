@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Reid Netterville III" />
-    <title>Scordatura</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Reid Netterville III" />
+  <meta name="description" content="String instrument fingerboard diagrams." />
+  <meta name="keywords" content="guitar, harmony, mode, music, scale, theory" />
+  <title>Scordatura</title>
 <style type="text/css">
 body {
   background-color: #000000;
@@ -46,7 +48,7 @@ section.chordophone dl {
   color: #999900;
 }
 section.chordophone dt {
-  margin-bottom: 0.2em;
+  margin-bottom: 0.25em;
   font-weight: bold;
   color: #8b4513;
 }
@@ -54,11 +56,15 @@ section.chordophone dd {
   margin: 0;
   padding: 0;
 }
-footer.attr {
+footer.utility {
   margin-top: 5%;
-}
-p.cpy {
   font-family: sans-serif;
+}
+noscript.message {
+  font-size: 24px;
+  color: #a52a2a;
+}
+p.notice {
   font-size: 0.8em;
   color: #2f4f4f;
 }
@@ -72,56 +78,68 @@ p.cpy {
   }
 }
 </style>
-  </head>
-  <body onload="ZrSiO4('n0')">
-    <nav id="topaz">
-  <script type="application/javascript">
+</head>
+<body onload="ZrSiO4('n0')">
+
+  <nav id="topaz">
+<script type="application/javascript">
 "use strict";
 (function() {
 
-  var s = ['n0', 'k6', 'j17', 'k6x5', 'j17y2', 'j3', 'j34k6',
-    'k2j17', 'n26y5', 'k26x5', 'j6', 'j36', 'k56', 'j136y7',
-    'k56x4', 'n167x4', 'j3k5x4', 'j167y2', 'j2', 'j236', 'j26',
-    'j23', 'j23k6', 'j2y3', 'j2k6', 'j26y3', 'j2k56', 'j246y3',
-    'j2k56x4', 'k157x6', 'j26y34', 'j2k6x5', 'j2k6y3', 'k1j6', 'n345',
-    'j3k6', 'n45y2', 'j3k56x4', 'k2j6', 'n5y2', 'k26', 'k256'];
+  var menuItem = [
+    'n0',     'k6',      'j17',    'k6x5',   'j17y2',   'j3',
+    'j34k6',  'k2j17',   'n26y5',  'k26x5',  'j6',      'j36',
+    'k56',    'j136y7',  'k56x4',  'n167x4', 'j3k5x4',  'j167y2',
+    'j2',     'j236',    'j26',    'j23',    'j23k6',   'j2y3',
+    'j2k6',   'j26y3',   'j2k56',  'j246y3', 'j2k56x4', 'k157x6',
+    'j26y34', 'j2k6x5',  'j2k6y3', 'k1j6',   'n345',    'j3k6', 
+    'n45y2',  'j3k56x4', 'k2j6',   'n5y2',   'k26',     'k256'
+  ];
 
-  for (var i = 0; i < s.length; i++) {
-    var h = '<li><a onclick=\"ZrSiO4(\'',
-        m = '\')\">',
-        c = '</a></li>';
-    if (0 == i) document.writeln('<ul>');
-    if (0 == ((i + 1) % 6)) {
-      document.writeln(h + s[i] + m + s[i] + c + '</ul>');
+  for (var ndx = 0; ndx < menuItem.length; ndx++) {
+    var head = '<li><a onclick=\"ZrSiO4(\'',
+        core = '\')\">',
+        tail = '<\/a><\/li>';
+
+    if (0 == ndx) document.writeln('<ul>');
+
+    if (0 == ((ndx + 1) % 6)) {
+      document.writeln(head + menuItem[ndx] +
+        core + menuItem[ndx] + tail + '<\/ul>');
     } else {
-      document.writeln(h + s[i] + m + s[i] + c);
+      document.writeln(head + menuItem[ndx] +
+        core + menuItem[ndx] + tail);
     }
-    if (i == s.length - 1) break;
-    if (0 == ((i + 1) % 6)) document.writeln('<ul>');
+
+    if (ndx == menuItem.length - 1) break;
+
+    if (0 == ((ndx + 1) % 6)) document.writeln('<ul>');
   }
 
 })();
-  </script>
-    </nav>
-    <section class="chordophone">
-      <dl id="fingerboard">
-        <dt></dt>
-        <dd></dd>
-        <dd></dd>
-        <dd></dd>
-        <dd></dd>
-        <dd></dd>
-        <dd></dd>
-        <dd></dd>
-      </dl>
-    </section>
-  <script type="application/javascript">
+</script>
+  </nav>
+
+  <section class="chordophone">
+    <dl id="fingerboard">
+      <dt></dt>
+      <dd></dd>
+      <dd></dd>
+      <dd></dd>
+      <dd></dd>
+      <dd></dd>
+      <dd></dd>
+      <dd></dd>
+    </dl>
+  </section>
+
+<script type="application/javascript">
 "use strict";
-var ZrSiO4 = function(n) {
+var ZrSiO4 = function(keyName) {
 
-  var o = {};
+  var dataStore = {};
 
-  o.db = {
+  dataStore.hanzi = {
       j2: "汞汞 钚铁 一一 一一 铜镎 铅金 一一 金铅 一一 银铀 一一 铁钚 ",
       j3: "汞锡 一一 锡汞 铀铁 一一 铅银 一一 金金 一一 银铅 一一 铁铀 ",
       j5: "铅铜 一一 金锡 一一 银汞 钒铁 铁钒 一一 一一 锡金 一一 铜铅 ",
@@ -206,7 +224,7 @@ var ZrSiO4 = function(n) {
  k1j56y7: "一一 金铀 镎锡 一一 钒汞 铁铁 汞钒 一一 锡镎 铀金 一一 一一 ",
  k2j56y7: "镎铜 一一 一一 铁钚 汞汞 钚铁 锡钒 一一 铜镎 铅金 一一 一一 "};
 
-  o.hz = {
+  dataStore.digraph = {
     gj: function(qp) {return(qp.slice(18,36).concat(qp.slice(0,18)))},
     dj: function(qp) {return(qp.slice( 3,36).concat(qp.slice(0, 3)))},
     aj: function(qp) {return(qp.slice(24,36).concat(qp.slice(0,24)))},
@@ -223,23 +241,27 @@ var ZrSiO4 = function(n) {
     ck: function(qp) {return(qp.slice( 3,36).concat(qp.slice(0, 3)))},
     gk: function(qp) {return(qp.slice(24,36).concat(qp.slice(0,24)))},
     dk: function(qp) {return(qp.slice( 9,36).concat(qp.slice(0, 9)))},
-    ak: function(qp) {return(qp.slice(30,36).concat(qp.slice(0,30)))}};
+    ak: function(qp) {return(qp.slice(30,36).concat(qp.slice(0,30)))}
+  };
 
-  o.t = n;
-  o.v = document.getElementById("fingerboard");
-  o.a = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
+  dataStore.layout = document.getElementById("fingerboard");
 
-  o.v.getElementsByTagName("dt")[0].textContent = o.t;
+  dataStore.epithet = dataStore.layout.getElementsByTagName("dt")[0];
+  dataStore.epithet.textContent = keyName;
 
-  for (var i = 0; i < 7; i++) {
-    o.v.getElementsByTagName("dd")[i].textContent = o.hz[o.a[i]](o.db[o.t]);
+  dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
+
+  for (var pitch = 0; pitch < 7; pitch++) {
+    dataStore.layout.getElementsByTagName("dd")[pitch].textContent =
+    dataStore.digraph[dataStore.pegBox[pitch]](dataStore.hanzi[keyName]);
   }
 
 };
-  </script>
-    <footer class="attr">
-      <p class="cpy">© 2017 Reid Netterville III</p>
-    </footer>
-  </body>
+</script>
+  <footer class="utility">
+    <noscript class="message">JavaScript disabled</noscript>
+    <p class="notice">© 2017 Reid Netterville III</p>
+  </footer>
+</body>
 </html>
 

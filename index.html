@@ -132,16 +132,7 @@ p.notice {
   </nav>
 
   <section class="chordophone">
-    <dl id="fingerboard">
-      <dt></dt>
-      <dd></dd>
-      <dd></dd>
-      <dd></dd>
-      <dd></dd>
-      <dd></dd>
-      <dd></dd>
-      <dd></dd>
-    </dl>
+    <dl id="fingerboard"></dl>
   </section>
 
 <script type="application/javascript">
@@ -259,14 +250,27 @@ var ZrSiO4 = function(keyName) {
     bk: function(qp) {return this.cn(qp)}
   };
 
+  dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
+
   dataStore.layout = document.getElementById("fingerboard");
+  dataStore.layout.innerHTML = null;
+
+  dataStore.ostracon = document.createDocumentFragment();
+
+  dataStore.potsherd = document.createElement("dt");
+  dataStore.ostracon.appendChild(dataStore.potsherd);
+
+  for (var elm = 0; elm < dataStore.pegBox.length; elm++) {
+    dataStore.potsherd = document.createElement("dd");
+    dataStore.ostracon.appendChild(dataStore.potsherd);
+  }
+
+  dataStore.layout.appendChild(dataStore.ostracon);
 
   dataStore.epithet = dataStore.layout.getElementsByTagName("dt")[0];
   dataStore.epithet.textContent = keyName;
 
-  dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
-
-  for (var pitch = 0; pitch < 7; pitch++) {
+  for (var pitch = 0; pitch < dataStore.pegBox.length; pitch++) {
     dataStore.layout.getElementsByTagName("dd")[pitch].textContent =
     dataStore.digraph[dataStore.pegBox[pitch]](dataStore.hanzi[keyName]);
   }

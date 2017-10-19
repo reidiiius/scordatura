@@ -1,5 +1,5 @@
 # Scordatura
-Chordophone
+Chordophone fingerboard diagrams
 
 ---
 

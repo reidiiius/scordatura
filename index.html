@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Reid Netterville III" />
-  <meta name="description" content="String instrument fingerboard diagrams." />
+  <meta name="description" content="Chordophone fingerboard diagrams." />
   <meta name="keywords" content="guitar, harmony, mode, music, scale, theory" />
   <title>Scordatura</title>
 <style type="text/css">
@@ -253,14 +253,17 @@ var ZrSiO4 = function(keyName) {
   dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
 
   dataStore.layout = document.getElementById("fingerboard");
-  dataStore.layout.innerHTML = null;
+
+  while (dataStore.layout.hasChildNodes()) {
+    dataStore.layout.removeChild(dataStore.layout.lastChild);
+  }
 
   dataStore.ostracon = document.createDocumentFragment();
 
   dataStore.potsherd = document.createElement("dt");
   dataStore.ostracon.appendChild(dataStore.potsherd);
 
-  for (var elm = 0; elm < dataStore.pegBox.length; elm++) {
+  for (var leaves = 0; leaves < dataStore.pegBox.length; leaves++) {
     dataStore.potsherd = document.createElement("dd");
     dataStore.ostracon.appendChild(dataStore.potsherd);
   }
@@ -270,9 +273,9 @@ var ZrSiO4 = function(keyName) {
   dataStore.epithet = dataStore.layout.getElementsByTagName("dt")[0];
   dataStore.epithet.textContent = keyName;
 
-  for (var pitch = 0; pitch < dataStore.pegBox.length; pitch++) {
-    dataStore.layout.getElementsByTagName("dd")[pitch].textContent =
-    dataStore.digraph[dataStore.pegBox[pitch]](dataStore.hanzi[keyName]);
+  for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
+    dataStore.layout.getElementsByTagName("dd")[pitches].textContent =
+    dataStore.digraph[dataStore.pegBox[pitches]](dataStore.hanzi[keyName]);
   }
 
 };

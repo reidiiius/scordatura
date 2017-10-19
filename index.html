@@ -252,31 +252,26 @@ var ZrSiO4 = function(keyName) {
 
   dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
 
+  dataStore.potsherd = document.createElement("dt");
+  dataStore.potsherd.appendChild(document.createTextNode(keyName));
+
+  dataStore.ostracon = document.createDocumentFragment();
+  dataStore.ostracon.appendChild(dataStore.potsherd);
+
+  for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
+    dataStore.potsherd = document.createElement("dd");
+    dataStore.potsherd.appendChild(document.createTextNode(
+    dataStore.digraph[dataStore.pegBox[pitches]](dataStore.hanzi[keyName])));
+    dataStore.ostracon.appendChild(dataStore.potsherd);
+  }
+
   dataStore.layout = document.getElementById("fingerboard");
 
   while (dataStore.layout.hasChildNodes()) {
     dataStore.layout.removeChild(dataStore.layout.lastChild);
   }
 
-  dataStore.ostracon = document.createDocumentFragment();
-
-  dataStore.potsherd = document.createElement("dt");
-  dataStore.ostracon.appendChild(dataStore.potsherd);
-
-  for (var leaves = 0; leaves < dataStore.pegBox.length; leaves++) {
-    dataStore.potsherd = document.createElement("dd");
-    dataStore.ostracon.appendChild(dataStore.potsherd);
-  }
-
   dataStore.layout.appendChild(dataStore.ostracon);
-
-  dataStore.epithet = dataStore.layout.getElementsByTagName("dt")[0];
-  dataStore.epithet.textContent = keyName;
-
-  for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
-    dataStore.layout.getElementsByTagName("dd")[pitches].textContent =
-    dataStore.digraph[dataStore.pegBox[pitches]](dataStore.hanzi[keyName]);
-  }
 
 };
 </script>

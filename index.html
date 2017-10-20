@@ -280,6 +280,12 @@ var ZrSiO4 = function(keyName) {
   dataStore.layout.appendChild(dataStore.ostracon);
 
 };
+
+document.addEventListener("keydown", function(instance) {
+  if (document.activeElement.parentNode && instance.altKey) {
+    ZrSiO4(document.activeElement.textContent);
+  }
+});
 </script>
 
   <footer class="utility">

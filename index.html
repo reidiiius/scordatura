@@ -22,15 +22,15 @@ nav#chalkboard {
 nav#chalkboard ul {
   width: 500px;
   margin: 0 auto;
-  border: 1px dotted #101010;
+  border: 0.07em solid #0b0b0b;
   padding: 0;
 }
 nav#chalkboard li {
   display: inline;
-  margin: 0.5em;
+  margin: 0;
   padding: 0.1em;
   line-height: 2em;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   font-family: sans-serif;
   font-size: 1em;
 }
@@ -39,6 +39,9 @@ nav#chalkboard li:focus {
 }
 nav#chalkboard li span {
   cursor: pointer;
+  border: 0.05em solid #101010;
+  padding: 0.2em 0.5em;
+  background-color: #080808;
   text-decoration: none;
   color: #008080;
 }
@@ -69,7 +72,7 @@ footer.utility {
   font-family: sans-serif;
 }
 noscript.message {
-  font-size: 24px;
+  font-size: 1.5em;
   color: #a52a2a;
 }
 p.notice {
@@ -81,25 +84,24 @@ p.notice {
     width: 480px;
   }
   nav#chalkboard li {
-    margin: 0.3em;
-    line-height: 1.38em;
+    padding: 0.05em;
+    line-height: 1.5em;
+    letter-spacing: 0.04em;
+    font-size: 0.92em;
+  }
+  nav#chalkboard li span {
+    border: 0;
+    padding: 0 0.4em;
   }
   dl#fingerboard {
     font-size: 1.25em;
   }
 }
 </style>
-</head>
-<body onload="ZrSiO4('n0')">
-
-  <nav id="chalkboard"></nav>
-
-  <dl id="fingerboard"></dl>
-
 <script type="application/javascript">
 "use strict";
 
-(function() {
+function RasaScripturam() {
 
   var slate = {};
 
@@ -141,9 +143,9 @@ p.notice {
   slate.layout = document.getElementById("chalkboard");
   slate.layout.appendChild(slate.ostracon);
 
-})();
+};
 
-var ZrSiO4 = function(keyName) {
+function ZrSiO4(numeronym) {
 
   var dataStore = {};
 
@@ -258,17 +260,33 @@ var ZrSiO4 = function(keyName) {
 
   dataStore.pegBox = ["fn", "cn", "gn", "dn", "an", "en", "bn"];
 
-  dataStore.potsherd = document.createElement("dt");
-  dataStore.potsherd.appendChild(document.createTextNode(keyName));
-
   dataStore.ostracon = document.createDocumentFragment();
-  dataStore.ostracon.appendChild(dataStore.potsherd);
+  dataStore.potsherd = document.createElement("dt");
 
-  for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
-    dataStore.potsherd = document.createElement("dd");
-    dataStore.potsherd.appendChild(document.createTextNode(
-    dataStore.digraph[dataStore.pegBox[pitches]](dataStore.hanzi[keyName])));
+  if (dataStore.hanzi.hasOwnProperty(numeronym)) {
+
+    dataStore.potsherd.appendChild(document.createTextNode(numeronym));
     dataStore.ostracon.appendChild(dataStore.potsherd);
+
+    for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
+      dataStore.potsherd = document.createElement("dd");
+      dataStore.potsherd.appendChild(document.createTextNode(
+      dataStore.digraph[dataStore.pegBox[pitches]](dataStore.hanzi[numeronym])));
+      dataStore.ostracon.appendChild(dataStore.potsherd);
+    }
+
+  } else {
+
+    dataStore.potsherd.appendChild(document.createTextNode("?"));
+    dataStore.ostracon.appendChild(dataStore.potsherd);
+
+    for (var pitches = 0; pitches < dataStore.pegBox.length; pitches++) {
+      dataStore.potsherd = document.createElement("dd");
+      dataStore.potsherd.appendChild(document.createTextNode((function() {
+      var z0 = ""; while (z0.length < 36) { z0 += "一一 " } return z0 })()));
+      dataStore.ostracon.appendChild(dataStore.potsherd);
+    }
+
   }
 
   dataStore.layout = document.getElementById("fingerboard");
@@ -281,12 +299,38 @@ var ZrSiO4 = function(keyName) {
 
 };
 
-document.addEventListener("keydown", function(instance) {
-  if (document.activeElement.parentNode && instance.altKey) {
-    ZrSiO4(document.activeElement.textContent);
-  }
-});
+function Palantiri() {
+
+  var cochlea = {};
+
+  cochlea.sensor = function(perceive) {
+    return document.hasFocus() && perceive.altKey;
+  };
+
+  cochlea.chalkboard = document.getElementById("chalkboard");
+
+  cochlea.chalkboard.addEventListener("keydown", function(instance) {
+    if (cochlea.sensor(instance)) {
+      ZrSiO4(document.activeElement.textContent);
+    }
+  }, false);
+
+}
+
+window.onload = function() {
+
+  RasaScripturam();
+  ZrSiO4("n0");
+  Palantiri();
+
+};
 </script>
+</head>
+<body>
+
+  <nav id="chalkboard"></nav>
+
+  <dl id="fingerboard"></dl>
 
   <footer class="utility">
     <noscript class="message">JavaScript disabled</noscript>

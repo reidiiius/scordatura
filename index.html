@@ -23,37 +23,34 @@ section#palettonal {
   margin: 0;
   padding: 0;
 }
-nav#chalkboard {
-  margin: 2% 0 0 0;
-  padding: 0;
-}
-nav#chalkboard ul {
+table#chalkboard {
   width: 500px;
-  margin: 0 auto;
-  border: 0.07em solid #0b0b0b;
+  margin: 2% auto 0 auto;
+  border-collapse: collapse;
   padding: 0;
 }
-nav#chalkboard li {
-  display: inline;
-  margin: 0;
+table#chalkboard td {
+  border: 0.08em solid #0b0b0b;
+  background-color: #040404;
   padding: 0.1em;
-  line-height: 2em;
+}
+table#chalkboard td:focus {
+  color: #2f4f4f;
+}
+table#chalkboard td button {
+  cursor: pointer;
+  border: 0.05em solid #101010;
+  border-radius: 0.3em;
+  background-color: #080808;
+  padding: 0.05em 0.25em;
+  line-height: 1.5em;
+  text-decoration: none;
   letter-spacing: 0.05em;
   font-family: sans-serif;
   font-size: 1em;
-}
-nav#chalkboard li:focus {
-  color: #2f4f4f;
-}
-nav#chalkboard li span {
-  cursor: pointer;
-  border: 0.05em solid #101010;
-  padding: 0.2em 0.5em;
-  background-color: #080808;
-  text-decoration: none;
   color: #008080;
 }
-nav#chalkboard li span:hover {
+table#chalkboard td button:hover {
   text-decoration: underline;
   color: #00ced1;
 }
@@ -92,18 +89,20 @@ p.notice {
   color: #2f4f4f;
 }
 @media screen and (max-width: 600px) {
-  nav#chalkboard ul {
-    width: 480px;
+  table#chalkboard {
+    margin: 1% auto 0 auto;
+    width: auto;
   }
-  nav#chalkboard li {
-    padding: 0.05em;
-    line-height: 1.5em;
-    letter-spacing: 0.04em;
-    font-size: 0.92em;
+  table#chalkboard td {
+    padding: 0;
   }
-  nav#chalkboard li span {
+  table#chalkboard td button {
+    margin: 0;
     border: 0;
-    padding: 0 0.4em;
+    padding: 0.03em 0.1em;
+    line-height: 1.3em;
+    letter-spacing: 0.01em;
+    font-size: 1em;
   }
   dl#fingerboard {
     font-size: 1.25em;
@@ -314,14 +313,15 @@ function EnhavTabelo() {
 
   slate.ostracon = document.createDocumentFragment();
 
-  slate.potsherd = document.createElement("nav");
+  slate.potsherd = document.createElement("table");
   slate.potsherd.setAttribute("id", "chalkboard");
 
-  slate.petiole = document.createElement("ul");
+  slate.petiole = document.createElement("tr");
+  slate.potsherd.appendChild(slate.petiole);
 
   for (var item = 0; item < slate.menu.length; item++) {
-    slate.leaf = document.createElement("li");
-    slate.bud = document.createElement("span");
+    slate.leaf = document.createElement("td");
+    slate.bud = document.createElement("button");
 
     slate.leaf.setAttribute("tabindex", item + 1);
     slate.bud.setAttribute("onclick", "ZrSiO4(\'" + slate.menu[item] + "\')");
@@ -333,7 +333,7 @@ function EnhavTabelo() {
     if (item == slate.menu.length - 1) break;
 
     if (0 == ((item + 1) % slate.columns)) {
-      slate.petiole = document.createElement("ul");
+      slate.petiole = document.createElement("tr");
       slate.potsherd.appendChild(slate.petiole);
     }
   }

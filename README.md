@@ -14,7 +14,7 @@ command line
 
     cd scordatura/
 
-    dwb -RS index.html
+    luakit -u index.html
 
 ---
 

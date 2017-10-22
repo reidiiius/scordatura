@@ -44,8 +44,8 @@ table#chalkboard td button {
   background-color: #080808;
   padding: 0.05em 0.25em;
   line-height: 1.5em;
-  text-decoration: none;
   letter-spacing: 0.05em;
+  text-decoration: none;
   font-family: sans-serif;
   font-size: 1em;
   color: #008080;
@@ -112,7 +112,10 @@ p.notice {
 <script type="application/javascript">
 "use strict";
 
-var JinshuLong = {
+var DiPyramid = {};
+
+
+DiPyramid.JinshuLong = {
       j2: "汞汞 钚铁 一一 一一 铜镎 铅金 一一 金铅 一一 银铀 一一 铁钚 ",
       j3: "汞锡 一一 锡汞 铀铁 一一 铅银 一一 金金 一一 银铅 一一 铁铀 ",
       j5: "铅铜 一一 金锡 一一 银汞 钒铁 铁钒 一一 一一 锡金 一一 铜铅 ",
@@ -197,14 +200,12 @@ var JinshuLong = {
  k1j56y7: "一一 金铀 镎锡 一一 钒汞 铁铁 汞钒 一一 锡镎 铀金 一一 一一 ",
  k2j56y7: "镎铜 一一 一一 铁钚 汞汞 钚铁 锡钒 一一 铜镎 铅金 一一 一一 "};
 
-Object.freeze(JinshuLong);
 
-
-function ZrSiO4(numeronym) {
+DiPyramid.ZrSiO4 = function(numeronym) {
 
   var dataStore = {};
 
-  dataStore.hanzi = new Object(JinshuLong);
+  dataStore.hanzi = new Object(DiPyramid.JinshuLong);
 
   dataStore.digraph = {
     fj: function(qp) {return this.en(qp)},
@@ -277,7 +278,7 @@ function ZrSiO4(numeronym) {
 };
 
 
-function PaLantiri() {
+DiPyramid.PaLantiri = function() {
 
   var cochlea = {};
 
@@ -289,14 +290,14 @@ function PaLantiri() {
 
   cochlea.chalkboard.addEventListener("keydown", function(instance) {
     if (cochlea.sensor(instance)) {
-      ZrSiO4(document.activeElement.textContent);
+      DiPyramid.ZrSiO4(document.activeElement.textContent);
     }
   }, false);
 
-}
+};
 
 
-function EnhavTabelo() {
+DiPyramid.EnhavTabelo = function() {
 
   var slate = {};
 
@@ -324,7 +325,7 @@ function EnhavTabelo() {
     slate.bud = document.createElement("button");
 
     slate.leaf.setAttribute("tabindex", item + 1);
-    slate.bud.setAttribute("onclick", "ZrSiO4(\'" + slate.menu[item] + "\')");
+    slate.bud.setAttribute("onclick", "DiPyramid.ZrSiO4(\'" + slate.menu[item] + "\')");
 
     slate.bud.textContent = slate.menu[item];
     slate.leaf.appendChild(slate.bud);
@@ -346,7 +347,7 @@ function EnhavTabelo() {
 };
 
 
-function PadStone() {
+DiPyramid.PadStone = function() {
 
   var gabion = {};
 
@@ -363,15 +364,17 @@ function PadStone() {
   gabion.scordatura = document.getElementById("scordatura");
   gabion.scordatura.appendChild(gabion.ostracon);
 
-}
+};
 
+
+Object.freeze(DiPyramid);
 
 window.onload = function() {
 
-  PadStone();
-  EnhavTabelo();
-  PaLantiri();
-  ZrSiO4("n0");
+  DiPyramid.PadStone();
+  DiPyramid.EnhavTabelo();
+  DiPyramid.PaLantiri();
+  DiPyramid.ZrSiO4("n0");
 
 };
 </script>
